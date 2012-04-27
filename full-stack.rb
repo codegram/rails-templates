@@ -1,5 +1,5 @@
 require 'ostruct'
-application_name = `pwd`.split('/').last
+application_name = `pwd`.split('/').last.strip
 run "echo > Gemfile"
 
 choices = OpenStruct.new
