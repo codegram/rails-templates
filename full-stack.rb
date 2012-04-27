@@ -68,7 +68,11 @@ run "bundle install"
 
 # Add minitest
 generate 'mini_test:install'
-application 'g.test_framework :mini_test, spec: true'
+application <<-eos
+config.generators do |g|
+  g.test_framework :mini_test, spec: true
+end
+eos
 
 # Install devise
 if choices.devise
