@@ -74,6 +74,9 @@ config.generators do |g|
 end
 eos
 
+# Initialize spinach
+generate 'spinach'
+
 # Install devise
 if choices.devise
   generate "devise:install"
