@@ -62,6 +62,7 @@ end
 gem 'jquery-rails'
 
 gem_group :production do
+  gem 'rack-cache'
   gem 'pg'
   gem 'fog' if choices.s3
 end
