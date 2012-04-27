@@ -91,7 +91,16 @@ File.open('test/minitest_helper.rb', 'a') do |f|
   f.puts "MiniTest::Unit.runner.reporters << MiniTest::Reporters::SpecReporter.new"
 end
 
-run "guard init minitest"
+File.open('Guardfile', 'w') do |f|
+  f.write <<-eos
+guard 'minitest' do
+  watch(%r|^test/(.*)_test\.rb|)
+  watch(%r|^test/minitest_helper\.rb|)    { "test" }
+  watch(%r|^lib/(.*)([^/]+)\.rb|)     { |m| "test/lib/\#{m[1]}\#{m[2]}_test.rb" }
+  watch(%r|^app/(.*)/(.*)\\\\.rb|) { |m| "test/\#{m[1]}/\#{m[2]}_test.rb" }
+end
+  eos
+end
 
 # Initialize spinach
 generate 'spinach'
@@ -107,6 +116,11 @@ run "guard init spinach"
 # Install active_admin
 if choices.active_admin
   generate "active_admin:install", choices.active_admin_user_model
+end
+
+# If using heroku
+if choices.heroku
+  application 'config.assets.initialize_on_precompile = false'
 end
 
 # Use carrierwave with s3
