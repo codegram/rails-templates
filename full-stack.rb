@@ -58,6 +58,7 @@ end
 gem_group :assets do
   gem 'sass-rails'
   gem 'compass-rails'
+  gem 'uglifier'
 end
 gem 'jquery-rails'
 
