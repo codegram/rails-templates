@@ -131,6 +131,10 @@ File.open('.gitignore', 'a') do |f|
   f.puts ".sassc"
 end
 
+File.open(".rvmrc", 'w') do |f|
+  f.puts "rvm --create use 1.9.3@#{application_name}"
+end
+
 # set up git
 git :init
 git :add => '.'
