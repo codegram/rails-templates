@@ -47,9 +47,6 @@ end
 
 gem_group :development, :test do
   gem "minitest-rails"
-end
-
-gem_group :test do
   gem "spinach-rails", group: 'test'
 end
 
