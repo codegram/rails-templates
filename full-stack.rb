@@ -97,7 +97,7 @@ guard 'minitest' do
   watch(%r|^test/(.*)_test\.rb|)
   watch(%r|^test/minitest_helper\.rb|)    { "test" }
   watch(%r|^lib/(.*)([^/]+)\.rb|)     { |m| "test/lib/\#{m[1]}\#{m[2]}_test.rb" }
-  watch(%r|^app/(.*)/(.*)\\\\.rb|) { |m| "test/\#{m[1]}/\#{m[2]}_test.rb" }
+  watch(%r|^app/(.*)/(.*)\\.rb|) { |m| "test/\#{m[1]}/\#{m[2]}_test.rb" }
 end
   eos
 end
