@@ -1,5 +1,4 @@
 require 'ostruct'
-
 application_name = `pwd`.split('/').last
 run "echo > Gemfile"
 
@@ -116,6 +115,14 @@ end
 run "rm app/assets/images/rails.png"
 run "rm public/index.html"
 run "rm public/favicon.ico"
+run "rm README.rdoc"
+File.open('Readme.md', 'w') do |file|
+  file.write <<-eos
+# {application_name}
+
+Write something here
+  eos
+end
 
 # set up git
 git :init
