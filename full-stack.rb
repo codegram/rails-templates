@@ -72,7 +72,7 @@ end
 eos
 
 # Fix the rake file
-File.open('Rakefile', 'a') do |file|
+File.open('Rakefile', 'a') do |f|
   f.write <<-eos
 Rake::TestTask.new do |t|
   t.test_files = Dir.glob("test/**/*_test.rb")
