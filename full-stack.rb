@@ -46,8 +46,11 @@ gem_group :development do
 end
 
 gem_group :development, :test do
-  gem "minitest-rails"
+  gem "minitest-rails", git: 'https://github.com/blowmage/minitest-rails.git'
+  gem 'minitest-reporters'
   gem "spinach-rails", group: 'test'
+  gem 'guard-spinach'
+  gem 'guard-minitest'
 end
 
 gem_group :assets do
@@ -82,6 +85,14 @@ task :default => [:test, :spinach]
   eos
 end
 
+File.open('test/minitest_helper.rb', 'a') do |f|
+  f.puts "require 'minitest/reporters'"
+  f.puts "MiniTest::Unit.runner = MiniTest::SuiteRunner.new"
+  f.puts "MiniTest::Unit.runner.reporters << MiniTest::Reporters::SpecReporter.new"
+end
+
+run "guard init minitest"
+
 # Initialize spinach
 generate 'spinach'
 
@@ -90,6 +101,8 @@ if choices.devise
   generate "devise:install"
   generate "devise", choices.devise_user_model
 end
+
+run "guard init spinach"
 
 # Install active_admin
 if choices.active_admin
