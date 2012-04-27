@@ -165,7 +165,7 @@ run "bundle exe compass init rails --syntax sass"
 run "rm app/views/layouts/application.html.erb"
 File.open('app/views/layouts/application.html.slim', 'w') do |f|
   f.write <<-eos
-doctype hml
+doctype html
 html
   head
     title #{application_name.camelize}
