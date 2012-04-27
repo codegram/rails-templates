@@ -34,6 +34,7 @@ gem 'rails-i18n' if choices.i18n
 gem 'jbuilder' if choices.json
 gem 'carrierwave' if choices.uploads
 gem 'devise' if choices.devise
+gem 'unicorn' if choices.heroku
 if choices.active_admin
   gem 'meta_search', version: '>= 1.1.0.pre'
   gem 'activeadmin'
@@ -43,6 +44,7 @@ gem_group :development do
   gem 'sqlite3'
   gem 'smusher' if choices.assets
   gem 'heroku' if choices.heroku
+  gem 'foreman' if choices.heroku
 end
 
 gem_group :development, :test do
@@ -121,6 +123,17 @@ end
 # If using heroku
 if choices.heroku
   application 'config.assets.initialize_on_precompile = false'
+  File.open('Procfile', 'w') do |f|
+    f.write <<-eof
+web: bundle exec unicorn_rails -p $PORT -c ./unicorn.rb
+    eof
+  end
+  File.open('unicorn.rb', 'w') do |f|
+    f.write <<-eof
+worker_processes 3 # amount of unicorn workers to spin up
+timeout 120         # restarts workers that hang for 30 seconds
+    eof
+  end
 end
 
 # Use carrierwave with s3
