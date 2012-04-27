@@ -124,6 +124,13 @@ Write something here
   eos
 end
 
+run 'rake db:migrate'
+
+File.open('.gitignore', 'a') do |f|
+  f.puts ".DS_Store"
+  f.puts ".sassc"
+end
+
 # set up git
 git :init
 git :add => '.'
