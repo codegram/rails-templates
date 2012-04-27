@@ -57,6 +57,7 @@ gem_group :assets do
   gem 'sass-rails'
   gem 'compass-rails'
 end
+gem 'jquery-rails'
 
 gem_group :production do
   gem 'pg'
