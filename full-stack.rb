@@ -112,6 +112,26 @@ if choices.assets
   application "config.middleware.insert_before Rack::Cache, Rack::Deflater", env: :production
 end
 
+# Init compass stylesheets
+run "bundle exe compass init rails --syntax sass"
+
+# Init a proper application layout
+run "rm app/views/layouts/application.html.erb"
+File.open('app/views/layouts/application.html.slim', 'w') do |f|
+  f.write <<-eos
+doctype hml
+html
+  head
+    title #{application_name.camelize}
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    /*link rel="shortcut icon" href=image_path('favicon.png')*/
+  body
+    =yield
+  eos
+end
+
 # Cleanup
 run "rm app/assets/images/rails.png"
 run "rm public/index.html"
