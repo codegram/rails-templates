@@ -71,6 +71,17 @@ config.generators do |g|
 end
 eos
 
+# Fix the rake file
+File.open('Rakefile', 'a') do |file|
+  f.write <<-eos
+Rake::TestTask.new do |t|
+  t.test_files = Dir.glob("test/**/*_test.rb")
+end
+
+task :default => [:test, :spinach]
+  eos
+end
+
 # Initialize spinach
 generate 'spinach'
 
