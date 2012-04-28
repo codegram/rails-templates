@@ -85,14 +85,7 @@ eos
 
 # Fix the rake file
 File.open('Rakefile', 'a') do |f|
-  f.write <<-eos
-require 'rake/testtask'
-Rake::TestTask.new do |t|
-  t.test_files = Dir.glob("test/**/*_test.rb")
-end
-
-task :default => [:test, :spinach]
-  eos
+  f.puts 'task :default => [:test, :spinach]'
 end
 
 File.open('test/minitest_helper.rb', 'a') do |f|
