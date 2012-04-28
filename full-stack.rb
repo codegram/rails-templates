@@ -56,6 +56,10 @@ gem_group :development, :test do
   gem 'machinist', version: '>= 2.0.0.beta.2'
 end
 
+gem_group :test do
+  gem 'database_cleaner'
+end
+
 gem_group :assets do
   gem 'sass-rails'
   gem 'compass-rails'
@@ -120,6 +124,19 @@ end
 eos
 File.open('test/minitest_helper.rb', 'a') do |f|
   f.puts "require 'blueprints'"
+end
+
+# Add database_cleaner
+File.open('test/minitest_helper.rb', 'a') do |f|
+  f.write <<-eos
+require 'database_cleaner'
+DatabaseCleaner.strategy = :truncation
+class MiniTest::Spec
+  before :each do
+    DatabaseCleaner.clean
+  end
+end
+  eos
 end
 
 # Install devise
