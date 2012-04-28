@@ -53,9 +53,6 @@ gem_group :development, :test do
   gem "spinach-rails", group: 'test'
   gem 'guard-spinach'
   gem 'guard-minitest'
-end
-
-gem_group :test do
   gem 'machinist', version: '>= 2.0.0.beta.2'
 end
 
