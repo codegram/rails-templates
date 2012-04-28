@@ -55,6 +55,10 @@ gem_group :development, :test do
   gem 'guard-minitest'
 end
 
+gem_group :test do
+  gem 'machinist', version: '>= 2.0.0.beta.2'
+end
+
 gem_group :assets do
   gem 'sass-rails'
   gem 'compass-rails'
@@ -109,6 +113,14 @@ end
 
 # Initialize spinach
 generate 'spinach'
+
+# Add machinist
+generate 'machinist:install'
+application <<-eos
+config.generators do |g|
+  g.fixture_replacement :machinist
+end
+eos
 
 # Install devise
 if choices.devise
