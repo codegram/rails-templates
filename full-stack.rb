@@ -197,7 +197,9 @@ if choices.assets
 end
 
 # Init compass stylesheets
-run "bundle exe compass init rails --syntax sass"
+run "bundle exec compass init rails --using blueprint/basic --syntax sass"
+run "rm app/assets/stylesheets/ie.css.sass"
+run "rm app/assets/stylesheets/print.css.sass"
 
 # Init a proper application layout
 run "rm app/views/layouts/application.html.erb"
