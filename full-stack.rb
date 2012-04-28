@@ -118,6 +118,9 @@ config.generators do |g|
   g.fixture_replacement :machinist
 end
 eos
+File.open('test/minitest_helper.rb', 'a') do |f|
+  f.puts "require 'blueprints'"
+end
 
 # Install devise
 if choices.devise
