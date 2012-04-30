@@ -83,6 +83,9 @@ config.generators do |g|
 end
 eos
 
+# Add draper
+generate "draper:install"
+
 # Fix the rake file
 File.open('Rakefile', 'a') do |f|
   f.puts 'task :default => [:test, :spinach]'
